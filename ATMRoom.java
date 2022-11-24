@@ -15,10 +15,18 @@ public class ATMRoom {
 
 
         atmRoom.atm.printCurrentATMStatus();
+        // checking balance 
+        ((AtmState) atmRoom.atm.getCurrentATMState()).insertCard(atmRoom.atm, atmRoom.user.card);
+        ((AtmState) atmRoom.atm.getCurrentATMState()).authenticatePin(atmRoom.atm, atmRoom.user.card, 123);
+        ((AtmState) atmRoom.atm.getCurrentATMState()).selectOperation(atmRoom.atm, atmRoom.user.card, TransactionType.BALANCE_CHECK);
+        ((AtmState) atmRoom.atm.getCurrentATMState()).displayBalance(atmRoom.atm, atmRoom.user.card);     
+        
+        //cash withdrawal
         ((AtmState) atmRoom.atm.getCurrentATMState()).insertCard(atmRoom.atm, atmRoom.user.card);
         ((AtmState) atmRoom.atm.getCurrentATMState()).authenticatePin(atmRoom.atm, atmRoom.user.card, 123);
         ((AtmState) atmRoom.atm.getCurrentATMState()).selectOperation(atmRoom.atm, atmRoom.user.card, TransactionType.CASH_WITHDRAWAL);
         ((AtmState) atmRoom.atm.getCurrentATMState()).cashWithdrawal(atmRoom.atm, atmRoom.user.card, 2700L);
+        
         atmRoom.atm.printCurrentATMStatus();
 
     }
